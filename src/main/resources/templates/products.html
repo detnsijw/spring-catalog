@@ -10,21 +10,26 @@
 </head>
 <body>
 <div class="container">
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Категории</option>
-        <div th:each="category : ${categories}">
-            <a href="/category_product"><option th:text="${category.getName()}"></option></a>
-        </div>
-    </select>
-    <h1>Все товары</h1>
+    <h3>Выберите категорию</h3>
+    <form action="/products" method="get">
+        <select name="categoryId" class="form-select" aria-label="Default select example">
+            <option selected th:value="null">Товары всех категорий</option>
+            <div th:each="category : ${categories}">
+                <option th:value="${category.getId()}" th:text="${category.getName()}"></option>
+            </div>
+        </select>
+        <button type="submit" class="btn btn-dark">Применить</button>
+    </form>
+    <h3>Выберите ценовой диапозон</h3>
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="price" th:text="${price}">
     <table class="table">
         <thead>
         <tr>
             <th>Название товара</th>
             <th>Стоимость</th>
             <th>Категория</th>
-            <th></th>
-            <th></th>
+            <th>Редактирование</th>
+            <th>Удаление</th>
         </tr>
         </thead>
         <tbody>

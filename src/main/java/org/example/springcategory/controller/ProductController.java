@@ -18,9 +18,10 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public String findAll(Model model, Integer categoryId){
+    public String findAll(Model model, Integer categoryId, Double price1, Double price2){
         model.addAttribute("products", productService.findAll(categoryId));
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("products", productService.findProduct(price1, price2));
         return "products";
     }
 

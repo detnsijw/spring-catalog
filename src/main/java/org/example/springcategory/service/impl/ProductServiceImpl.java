@@ -96,6 +96,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll(Integer categoryId) {
+        if(categoryId==null){
+            return productRepository.findAll();
+        }
         return productRepository.findAllByCategoryId(categoryId);
     }
 
@@ -110,6 +113,14 @@ public class ProductServiceImpl implements ProductService {
             result.put(option, optionalValue);
         }
         return result;
+    }
+
+    @Override
+    public List<Product> findProduct(Double price1, Double price2, Integer categoryId) {
+        if(price1==null||price2==null||categoryId==null){
+            return ;
+        }
+        return productRepository.findAllByCategoryId(categoryId);
     }
 
     @Override
