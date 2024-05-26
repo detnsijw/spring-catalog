@@ -115,23 +115,23 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
-    @Override
-    public List<Product> findProduct(Double price1, Double price2, Integer categoryId) {
-        if(price1==null){
-            return productRepository.findAllByPrice(price2);
-        } if(price2==null){
-            return productRepository.findAllByPrice(price1);
-        } if(categoryId==null){
-            return productRepository.findAll();
-        } if(price1==null & price2==null){
-            return productRepository.findAll();
-        } if(price1!=null & price2!=null){
-            return productRepository.findAllByPriceBetween(price1, price2);
-        } if(price1!=null & price2!=null & categoryId!=null){
-            return productRepository.findAllByPriceBetweenAndCategoryId(price1, price2, categoryId);
-        }
-        return productRepository.findAll();
-    }
+//    @Override
+//    public List<Product> findProduct(Double price1, Double price2, Integer categoryId) {
+//        if(price1==null){
+//            return productRepository.findAllByPrice(price2);
+//        } if(price2==null){
+//            return productRepository.findAllByPrice(price1);
+//        } if(categoryId==null){
+//            return productRepository.findAll();
+//        } if(price1==null & price2==null){
+//            return productRepository.findAll();
+//        } if(price1!=null & price2!=null){
+//            return productRepository.findAllByPriceBetween(price1, price2);
+//        } if(price1!=null & price2!=null & categoryId!=null){
+//            return productRepository.findAllByPriceBetweenAndCategoryId(price1, price2, categoryId);
+//        }
+//        return productRepository.findAll();
+//    }
 
     @Override
     public void priceFrom(double price) {

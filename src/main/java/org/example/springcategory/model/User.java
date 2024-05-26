@@ -17,10 +17,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    int role;
     String login;
     String password;
     String name;
-    String surname;
-    LocalDateTime registration_date;
+    String lastname;
+    Role role;
+    LocalDateTime created;
 }

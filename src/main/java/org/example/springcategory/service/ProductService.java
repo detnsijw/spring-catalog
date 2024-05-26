@@ -16,7 +16,7 @@ public interface ProductService {
     List<Product> findAll(Integer categoryId);
     Map<Option, Optional<Value>> getOptions(Product product);
 
-    List<Product> findProduct(Double price1, Double price2, Integer categoryId);
+//    List<Product> findProduct(Double price1, Double price2, Integer categoryId);
 
     void priceFrom(double price);
 }
