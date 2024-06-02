@@ -14,43 +14,46 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
-    private final CategoryService categoryService;
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     @GetMapping
-    public String findAll(Model model, Integer categoryId){
-        model.addAttribute("products", productService.findAll(categoryId));
+    public String findAll(
+            @RequestParam(defaultValue = "0") int from,
+            @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
+            @RequestParam(required = false) Integer categoryId,
+            Model model
+    ) {
+        model.addAttribute("products", productService.findAll(categoryId, from, to));
         model.addAttribute("categories", categoryService.findAll());
-//        model.addAttribute("products", productService.findProduct(price1, price2, categoryId));
         return "products";
     }
 
-    @GetMapping("create/chooseCategory")
-    public String chooseCategory(Model model){
+    @GetMapping("{productId}")
+    public String findById(
+            @PathVariable int productId,
+            Model model
+    ) {
+        Product product = productService.findById(productId);
+        model.addAttribute("product", product);
+        model.addAttribute("options", productService.getOptions(product));
+        return "product";
+    }
+
+    @GetMapping("/create/chooseCategory")
+    public String chooseCategory(Model model) {
         model.addAttribute("categories", categoryService.findAll());
         return "choose_category_to_product";
     }
 
-    @GetMapping("/addProduct")
-    public String showForm(@RequestParam int categoryId, Model model){
+    @GetMapping("/create")
+    public String showForm(Model model, @RequestParam(required = false) Integer categoryId) {
+        if (categoryId == null) {
+            return "redirect:/products/create/chooseCategory";
+        }
         model.addAttribute("product", new Product());
         model.addAttribute("category", categoryService.findById(categoryId));
         return "product_create";
-    }
-
-    @PostMapping("/addProduct")
-    public String createPost(@ModelAttribute Product product,
-                             @RequestParam List<String> values,
-                             @RequestParam List<Integer> optionIds,
-                             @RequestParam int categoryId){
-        productService.create(product, categoryId, optionIds, values );
-        return "redirect:/products";
-    }
-
-    @GetMapping("/delete/{productId}")
-    public String deleteForm(@PathVariable int productId){
-        productService.delete(productId);
-        return "redirect:/products";
     }
 
     @GetMapping("/update/{productId}")
@@ -59,6 +62,17 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("options", productService.getOptions(product));
         return "product_update";
+    }
+
+    @PostMapping("/create")
+    public String create(
+            @ModelAttribute Product product,
+            @RequestParam Integer categoryId,
+            @RequestParam List<String> valueNames,
+            @RequestParam List<Integer> optionIds
+    ) {
+        productService.create(product, categoryId, optionIds, valueNames);
+        return "redirect:/products";
     }
 
     @PostMapping("/update/{productId}")
@@ -73,11 +87,9 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("/{productId}")
-    public String card(@PathVariable int productId, Model model){
-        Product product = productService.findById(productId);
-        model.addAttribute("product", product);
-        model.addAttribute("options", productService.getOptions(product));
-        return "product";
+    @GetMapping("/delete/{productId}")
+    public String deleteById(@PathVariable int productId) {
+        productService.deleteById(productId);
+        return "redirect:/products";
     }
 }

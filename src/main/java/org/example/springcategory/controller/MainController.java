@@ -1,16 +1,20 @@
 package org.example.springcategory.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.springcategory.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/main_menu")
-public class MainMenu {
+public class MainController {
+
+    private final UserService userService;
+
     @GetMapping
-    public String menu(){
+    public String mainPage(Model model) {
+        model.addAttribute("user", userService.getUser());
         return "main_menu";
     }
 }

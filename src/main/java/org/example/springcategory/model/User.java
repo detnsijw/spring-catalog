@@ -20,7 +20,8 @@ public class User {
     String login;
     String password;
     String name;
-    String lastname;
+    String surname;
     Role role;
+    @Column(name = "registration_date")
     LocalDateTime created;
 }

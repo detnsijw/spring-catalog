@@ -11,21 +11,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
-        http.authorizeHttpRequests(auth ->{
+        http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/products/create").authenticated();
             auth.requestMatchers("/products/update/**").hasRole("admin");
             auth.anyRequest().permitAll();
         });
+
         http.formLogin(Customizer.withDefaults());
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder encoder(){
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 }

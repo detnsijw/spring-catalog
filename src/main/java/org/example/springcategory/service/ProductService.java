@@ -10,13 +10,14 @@ import java.util.Optional;
 
 public interface ProductService {
     void create(Product product, int categoryId, List<Integer> optionIds, List<String> values);
-    void delete(int categoryId);
-    void update(int productId, String productName, double price, List<Integer> optionIds, List<String> values);
+
+    void update(int productId, String updatedName, double updatedPrice, List<Integer> optionIds, List<String> values);
+
+    List<Product> findAll(Integer categoryId, int from, int to);
+
     Product findById(int id);
-    List<Product> findAll(Integer categoryId);
+
+    void deleteById(int id);
+
     Map<Option, Optional<Value>> getOptions(Product product);
-
-//    List<Product> findProduct(Double price1, Double price2, Integer categoryId);
-
-    void priceFrom(double price);
 }

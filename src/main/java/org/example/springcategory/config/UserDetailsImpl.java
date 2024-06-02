@@ -1,14 +1,16 @@
 package org.example.springcategory.config;
 
-import lombok.RequiredArgsConstructor;
 import org.example.springcategory.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
+
     private final User user;
 
     @Override

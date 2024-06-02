@@ -18,6 +18,17 @@
                 <option th:value="${category.getId()}" th:text="${category.getName()}"></option>
             </div>
         </select>
+        <h3>Выберите диапозон</h3>
+        <h4>От</h4>
+        <input type="text" class="form-control"
+               aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default"
+               id="from" name="from">
+        <h4>До</h4>
+        <input type="text" class="form-control"
+               aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default"
+               id="to" name="to">
         <button type="submit" class="btn btn-dark">Применить</button>
     </form>
     <table class="table">
