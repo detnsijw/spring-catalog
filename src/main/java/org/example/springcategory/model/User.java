@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,8 +21,11 @@ public class User {
     String login;
     String password;
     String name;
-    String surname;
+    String lastname;
     Role role;
-    @Column(name = "registration_date")
+//    @Column(name = "registration_date")
     LocalDateTime created;
+
+    @OneToMany(mappedBy = "user")
+    List<CartItem> cartItems;
 }

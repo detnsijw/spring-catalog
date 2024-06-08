@@ -22,6 +22,9 @@
             [[${entry.getKey().getName()}]] : [[${entry.getValue().isPresent() ? entry.getValue().get().name : ''}]]
         </p>
     </div>
+    <form th:action="@{|/cart/${product.getId()}|}" method="post">
+        <button type="submit">Добавить в корзину</button>
+    </form>
 </div>
 </body>
 <script src="https://kit.fontawesome.com/176ce5fa08.js"
