@@ -5,10 +5,7 @@ import org.example.springcategory.model.User;
 import org.example.springcategory.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,8 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/cart/{productId}")
-    public String addItemToCart(@PathVariable int productId){
-        userService.addItemToCart(productId);
+    public String addItemToCart(@PathVariable int productId,
+                                @RequestParam int counter){
+        userService.addItemToCart(productId, counter);
         return "redirect:/cart";
     }
 }

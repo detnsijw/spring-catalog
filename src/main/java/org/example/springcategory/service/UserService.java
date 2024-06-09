@@ -12,5 +12,5 @@ public interface UserService {
 
     List<CartItem> findAllCartItems();
 
-    void addItemToCart(int productId);
+    void addItemToCart(int productId, int counter);
 }

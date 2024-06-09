@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,22 +50,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addItemToCart(int productId) {
+    public void addItemToCart(int productId, int counter) {
         Product product = productRepository.findById(productId).orElseThrow();
         User user = getUser();
         Optional<CartItem> optional = cartItemRepository.findByUserAndProduct(user, product);
-
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             CartItem cartItem = optional.get();
-            cartItem.setQuantity(0);
+            cartItem.setQuantity(cartItem.getQuantity() + counter);
+
+            cartItemRepository.save(cartItem);
+        } else {
+            CartItem cartItem = new CartItem();
+            cartItem.setUser(user);
+
+            cartItem.setProduct(product);
+            cartItem.setQuantity(counter);
+            cartItemRepository.save(cartItem);
         }
-
-        CartItem cartItem = new CartItem();
-        cartItem.setUser(user);
-
-        cartItem.setProduct(product);
-        cartItem.setQuantity(1);
-
-        cartItemRepository.save(cartItem);
     }
 }
