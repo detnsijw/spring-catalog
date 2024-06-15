@@ -24,7 +24,7 @@
             <td th:text="${item.getProduct().getName()}"></td>
             <td th:text="${item.getProduct().getPrice() * item.getQuantity()}"></td>
             <td th:text="${item.getQuantity()}"></td>
-            <td><a th:href="@{|/cart/delete/${item.getProduct().getId()}|}">
+            <td><a th:href="@{|/cart/delete/${item.getId()}|}">
                 <i class="fa-regular fa-trash-can"></i></a></td>
         </tr>
         </tbody>

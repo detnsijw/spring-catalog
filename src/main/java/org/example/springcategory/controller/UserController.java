@@ -19,6 +19,11 @@ public class UserController {
         return "user_register";
     }
 
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
     @PostMapping("/register")
     public String create(@ModelAttribute User user) {
         userService.create(user);
@@ -38,9 +43,9 @@ public class UserController {
         return "redirect:/cart";
     }
 
-    @GetMapping("/delete/{productId}")
-    public String deleteById(@PathVariable int productId){
-        userService.deleteItemById(productId);
+    @GetMapping("/cart/delete/{id}")
+    public String deleteById(@PathVariable int id){
+        userService.deleteItemById(id);
         return "redirect:/cart";
     }
 }

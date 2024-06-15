@@ -24,7 +24,7 @@ public class SecurityConfig {
             auth.anyRequest().permitAll();
         });
 
-        http.formLogin(Customizer.withDefaults());
+        http.formLogin(login -> login.loginPage("/login"));
         return http.build();
     }
 
