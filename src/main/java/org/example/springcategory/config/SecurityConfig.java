@@ -18,7 +18,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/products/create").authenticated();
+            auth.requestMatchers("/categories/create").authenticated();
             auth.requestMatchers("/products/update/**").hasRole("admin");
+            auth.requestMatchers("/products/delete/{productId}").hasRole("admin");
             auth.anyRequest().permitAll();
         });
 

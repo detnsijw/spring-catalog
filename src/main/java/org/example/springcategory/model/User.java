@@ -21,9 +21,10 @@ public class User {
     String login;
     String password;
     String name;
+    @Column(name = "surname")
     String lastname;
     Role role;
-//    @Column(name = "registration_date")
+    @Column(name = "registration_date")
     LocalDateTime created;
 
     @OneToMany(mappedBy = "user")

@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
             cartItemRepository.save(cartItem);
         }
     }
+
+    @Override
+    public void deleteItemById(int productId) {
+        cartItemRepository.deleteById(productId);
+    }
 }

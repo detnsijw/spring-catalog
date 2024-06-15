@@ -37,4 +37,10 @@ public class UserController {
         userService.addItemToCart(productId, counter);
         return "redirect:/cart";
     }
+
+    @GetMapping("/delete/{productId}")
+    public String deleteById(@PathVariable int productId){
+        userService.deleteItemById(productId);
+        return "redirect:/cart";
+    }
 }

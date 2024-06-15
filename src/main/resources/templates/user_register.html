@@ -9,29 +9,34 @@
           crossorigin="anonymous">
 </head>
 <body>
-<form action="/register" method="post" th:object="${user}">
-    <label>
-        Name:
-        <input type="text" th:field="*{name}">
-    </label>
-    <br>
-    <label>
-        Surname:
-        <input type="text" th:field="*{lastname}">
-    </label>
-    <br>
-    <label>
-        Login:
-        <input type="text" th:field="*{login}">
-    </label>
-    <br>
-    <label>
-        Password:
-        <input type="password" th:field="*{password}">
-    </label>
-
-    <button type="submit" class="btn btn-dark">Сохранить</button>
-</form>
+<div class="container">
+    <figure class="text-center">
+        <h2>Please sign up</h2>
+        <form action="/register" method="post" th:object="${user}">
+            <label>
+                Name:
+                <input type="text" th:field="*{name}">
+            </label>
+            <br>
+            <label>
+                Surname:
+                <input type="text" th:field="*{lastname}">
+            </label>
+            <br>
+            <label>
+                Login:
+                <input type="text" th:field="*{login}">
+            </label>
+            <br>
+            <label>
+                Password:
+                <input type="password" th:field="*{password}">
+            </label>
+            <br>
+            <button type="submit" class="btn btn-dark">Save</button>
+        </form>
+    </figure>
+</div>
 </body>
 <script src="https://kit.fontawesome.com/176ce5fa08.js"
         crossorigin="anonymous"></script>

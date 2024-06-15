@@ -13,4 +13,6 @@ public interface UserService {
     List<CartItem> findAllCartItems();
 
     void addItemToCart(int productId, int counter);
+
+    void deleteItemById(int productId);
 }
