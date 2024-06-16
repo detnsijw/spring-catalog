@@ -57,12 +57,10 @@ public class UserServiceImpl implements UserService {
         if (optional.isPresent()) {
             CartItem cartItem = optional.get();
             cartItem.setQuantity(cartItem.getQuantity() + counter);
-
             cartItemRepository.save(cartItem);
         } else {
             CartItem cartItem = new CartItem();
             cartItem.setUser(user);
-
             cartItem.setProduct(product);
             cartItem.setQuantity(counter);
             cartItemRepository.save(cartItem);

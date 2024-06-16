@@ -15,7 +15,6 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final OptionService optionService;
 
-
     @GetMapping
     public String findAll(Model model){
         System.out.println("/categories");
