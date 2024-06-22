@@ -9,10 +9,4 @@ public interface UserService {
     void create(User user);
 
     User getUser();
-
-    List<CartItem> findAllCartItems();
-
-    void addItemToCart(int productId, int counter);
-
-    void deleteItemById(int productId);
 }

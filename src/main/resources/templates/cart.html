@@ -14,21 +14,36 @@
         <thead>
         <tr>
             <th>Название товара</th>
-            <th>Стоимость</th>
             <th>Количество</th>
+            <th>Стоимость</th>
             <th>Удаление</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
         <tr th:each="item : ${cartItems}">
             <td th:text="${item.getProduct().getName()}"></td>
+            <td>
+                <a th:href="@{|/cart/${item.getId()}/decrease|}"
+                   class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">-</a>
+                <span th:text="${item.getQuantity()}"></span>
+                <a th:href="@{|/cart/${item.getId()}/increase|}"
+                   class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">+</a>
+            </td>
             <td th:text="${item.getProduct().getPrice() * item.getQuantity()}"></td>
-            <td th:text="${item.getQuantity()}"></td>
             <td><a th:href="@{|/cart/delete/${item.getId()}|}">
                 <i class="fa-regular fa-trash-can"></i></a></td>
         </tr>
         </tbody>
     </table>
+    <p>
+        <a th:href="@{/cart/deleteAll}"
+           class="link-dark
+           link-offset-2
+           link-underline-opacity-25
+           link-underline-opacity-100-hover">
+            Очистить корзину
+        </a>
+    </p>
 </div>
 </body>
 <script src="https://kit.fontawesome.com/176ce5fa08.js"

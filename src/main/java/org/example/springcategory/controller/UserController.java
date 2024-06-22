@@ -29,23 +29,4 @@ public class UserController {
         userService.create(user);
         return "redirect:/login";
     }
-
-    @GetMapping("/cart")
-    public String getCartPage(Model model){
-        model.addAttribute("cartItems", userService.findAllCartItems());
-        return "cart";
-    }
-
-    @PostMapping("/cart/{productId}")
-    public String addItemToCart(@PathVariable int productId,
-                                @RequestParam int counter){
-        userService.addItemToCart(productId, counter);
-        return "redirect:/cart";
-    }
-
-    @GetMapping("/cart/delete/{id}")
-    public String deleteById(@PathVariable int id){
-        userService.deleteItemById(id);
-        return "redirect:/cart";
-    }
 }

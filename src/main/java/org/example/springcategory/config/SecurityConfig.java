@@ -24,7 +24,10 @@ public class SecurityConfig {
             auth.anyRequest().permitAll();
         });
 
-        http.formLogin(login -> login.loginPage("/login"));
+        http.formLogin(formLogin -> {
+            formLogin.loginPage("/login");
+            formLogin.defaultSuccessUrl("/products");
+        });
         return http.build();
     }
 

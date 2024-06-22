@@ -42,33 +42,4 @@ public class UserServiceImpl implements UserService {
                 .findByLogin(authentication.getName())
                 .orElseThrow();
     }
-
-    @Override
-    public List<CartItem> findAllCartItems() {
-        User user = getUser();
-        return user.getCartItems();
-    }
-
-    @Override
-    public void addItemToCart(int productId, int counter) {
-        Product product = productRepository.findById(productId).orElseThrow();
-        User user = getUser();
-        Optional<CartItem> optional = cartItemRepository.findByUserAndProduct(user, product);
-        if (optional.isPresent()) {
-            CartItem cartItem = optional.get();
-            cartItem.setQuantity(cartItem.getQuantity() + counter);
-            cartItemRepository.save(cartItem);
-        } else {
-            CartItem cartItem = new CartItem();
-            cartItem.setUser(user);
-            cartItem.setProduct(product);
-            cartItem.setQuantity(counter);
-            cartItemRepository.save(cartItem);
-        }
-    }
-
-    @Override
-    public void deleteItemById(int productId) {
-        cartItemRepository.deleteById(productId);
-    }
 }

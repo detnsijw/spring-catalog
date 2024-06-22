@@ -23,12 +23,6 @@
         </p>
     </div>
     <form th:action="@{|/cart/${product.getId()}|}" method="post">
-        <label>
-            Напишите количество товаров, которое вы хотите добавить в корзину
-            <input type="number" class="form-control" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default" name="counter" value="1">
-        </label>
-        <br>
         <button type="submit" class="btn btn-dark">Добавить в корзину</button>
     </form>
 </div>
