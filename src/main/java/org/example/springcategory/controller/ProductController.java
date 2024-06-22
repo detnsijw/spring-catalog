@@ -92,4 +92,9 @@ public class ProductController {
         productService.deleteById(productId);
         return "redirect:/products";
     }
+
+    @GetMapping("/products/sorting")
+    public String sorting(){
+        return "sorting";
+    }
 }

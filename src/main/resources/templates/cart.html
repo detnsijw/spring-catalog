@@ -24,10 +24,10 @@
             <td th:text="${item.getProduct().getName()}"></td>
             <td>
                 <a th:href="@{|/cart/${item.getId()}/decrease|}"
-                   class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">-</a>
+                   class="text-decoration-none text-dark">-</a>
                 <span th:text="${item.getQuantity()}"></span>
                 <a th:href="@{|/cart/${item.getId()}/increase|}"
-                   class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">+</a>
+                   class="text-decoration-none text-dark">+</a>
             </td>
             <td th:text="${item.getProduct().getPrice() * item.getQuantity()}"></td>
             <td><a th:href="@{|/cart/delete/${item.getId()}|}">
@@ -37,10 +37,7 @@
     </table>
     <p>
         <a th:href="@{/cart/deleteAll}"
-           class="link-dark
-           link-offset-2
-           link-underline-opacity-25
-           link-underline-opacity-100-hover">
+           class="text-decoration-none text-dark">
             Очистить корзину
         </a>
     </p>
