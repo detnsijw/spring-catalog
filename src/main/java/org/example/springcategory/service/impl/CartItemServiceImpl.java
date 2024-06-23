@@ -79,4 +79,14 @@ public class CartItemServiceImpl implements CartItemService {
         User user = userService.getUser();
         cartItemRepository.deleteAll(user.getCartItems());
     }
+
+    @Override
+    public double sumOfPrice() {
+        User user = userService.getUser();
+        double sum = 0;
+        for (CartItem item : user.getCartItems()) {
+            sum += item.getProduct().getPrice() * item.getQuantity();
+        }
+        return sum;
+    }
 }

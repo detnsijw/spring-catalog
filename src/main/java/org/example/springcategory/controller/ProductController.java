@@ -2,6 +2,7 @@ package org.example.springcategory.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.springcategory.model.Product;
+import org.example.springcategory.repository.ProductRepository;
 import org.example.springcategory.service.CategoryService;
 import org.example.springcategory.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,13 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final ProductRepository productRepository;
 
     @GetMapping
-    public String findAll(
-            @RequestParam(defaultValue = "0") int from,
-            @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
-            @RequestParam(required = false) Integer categoryId,
-            Model model
-    ) {
+    public String findAll(Model model,
+                          @RequestParam(defaultValue = "0") int from,
+                          @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
+                          @RequestParam(required = false) Integer categoryId){
         model.addAttribute("products", productService.findAll(categoryId, from, to));
         model.addAttribute("categories", categoryService.findAll());
         return "products";
@@ -93,8 +93,12 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("/products/sorting")
-    public String sorting(){
+    @GetMapping("/sorting")
+    public String sorting(Model model,
+                          @RequestParam(defaultValue = "0") int from,
+                          @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
+                          @RequestParam(required = false) Integer categoryId){
+        model.addAttribute("products", productService.findAll(categoryId, from, to));
         return "sorting";
     }
 }

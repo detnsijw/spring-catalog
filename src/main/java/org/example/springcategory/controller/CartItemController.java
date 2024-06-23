@@ -15,6 +15,7 @@ public class CartItemController {
 
     @GetMapping
     public String getCartPage(Model model) {
+        model.addAttribute("totalPrice", cartItemService.sumOfPrice());
         model.addAttribute("cartItems", cartItemService.findAllCartItems());
         return "cart";
     }
@@ -48,4 +49,6 @@ public class CartItemController {
         cartItemService.deleteAll();
         return "redirect:/cart";
     }
+
+
 }

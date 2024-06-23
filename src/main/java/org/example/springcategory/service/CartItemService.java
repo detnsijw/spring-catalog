@@ -16,4 +16,6 @@ public interface CartItemService {
     void deleteItemById(int id);
 
     void deleteAll();
+
+    double sumOfPrice();
 }
