@@ -92,13 +92,4 @@ public class ProductController {
         productService.deleteById(productId);
         return "redirect:/products";
     }
-
-    @GetMapping("/sorting")
-    public String sorting(Model model,
-                          @RequestParam(defaultValue = "0") int from,
-                          @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
-                          @RequestParam(required = false) Integer categoryId){
-        model.addAttribute("products", productService.findAll(categoryId, from, to));
-        return "sorting";
-    }
 }

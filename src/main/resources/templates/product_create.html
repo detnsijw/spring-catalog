@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="/products/addProduct" method="post" th:object="${product}">
+    <form action="/products/create" method="post" th:object="${product}">
         <input type="hidden" name="categoryId" th:value="${category.id}">
         <div class="input-group mb-3">
             <label for="name">
@@ -30,7 +30,7 @@
             <p th:text="${option.name}"></p>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="values">
         </div>
-        <button type="submit" class="btn btn-dark">Сохранить</button>
+        <button type="submit" class="btn btn-dark">Создать</button>
     </form>
 </div>
 </body>

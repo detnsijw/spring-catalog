@@ -2,7 +2,6 @@ package org.example.springcategory.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,14 +10,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/products/create").authenticated();
-            auth.requestMatchers("/categories/create").authenticated();
+            auth.requestMatchers("/products/create").hasRole("admin");
+            auth.requestMatchers("/categories/create").hasRole("admin");
             auth.requestMatchers("/products/update/**").hasRole("admin");
             auth.requestMatchers("/products/delete/{productId}").hasRole("admin");
             auth.anyRequest().permitAll();
