@@ -1,7 +1,9 @@
 package org.example.springcategory.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
@@ -9,22 +11,26 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "orders")
 @Entity
+@Table(name = "orders")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String status;
-    String delivery_address;
-    LocalDateTime date_of_order;
 
-    @OneToMany
-    List<CartItem> cartItems;
+    @Column(name = "delivery_address")
+    String address;
 
-    @OneToMany
-    List<User> users;
+    OrderStatus status;
+
+    @Column(name = "date_of_order")
+    LocalDateTime created;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @OneToMany(mappedBy = "order")
+    List<OrderProduct> orderProducts;
 }

@@ -21,13 +21,16 @@ public class User {
     String login;
     String password;
     String name;
-    @Column(name = "surname")
+//    @Column(name = "surname")
     String lastname;
     String email;
     Role role;
-    @Column(name = "registration_date")
+//    @Column(name = "registration_date")
     LocalDateTime created;
 
     @OneToMany(mappedBy = "user")
     List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 }

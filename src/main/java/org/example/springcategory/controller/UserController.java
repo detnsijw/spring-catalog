@@ -29,4 +29,10 @@ public class UserController {
         userService.create(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/user/orders")
+    public String showUserOrders(Model model){
+        model.addAttribute("orders", userService.getUser().getOrders());
+        return "order";
+    }
 }
