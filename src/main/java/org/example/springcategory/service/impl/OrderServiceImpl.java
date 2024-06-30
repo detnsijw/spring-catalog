@@ -9,7 +9,10 @@ import org.example.springcategory.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void create(String address) {
-        User user = userService.getUser();
+        User user = userService.getUser().orElseThrow();
 
         Order order = new Order();
         order.setAddress(address);
@@ -38,5 +41,21 @@ public class OrderServiceImpl implements OrderService {
             orderProduct.setQuantity(cartItem.getQuantity());
             orderProductRepository.save(orderProduct);
         }
+    }
+
+    private String getMonthOnRus(LocalDateTime created) {
+        Month month = created.getMonth();
+        Locale locale = Locale.of("ru");
+        return month.getDisplayName(TextStyle.SHORT, locale);
+    }
+
+    @Override
+    public String getOrderDate(Order order){
+        LocalDateTime created = order.getCreated();
+        String fullDate = created.getDayOfMonth()
+                + " " + getMonthOnRus(created)
+                + " " + created.getYear() + "г."
+                + " " + created.getHour() + ":" + created.getMinute();
+        return fullDate;
     }
 }

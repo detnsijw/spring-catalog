@@ -23,14 +23,14 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public List<CartItem> findAllCartItems() {
-        User user = userService.getUser();
+        User user = userService.getUser().orElseThrow();
         return cartItemRepository.findAllByUserOrderById(user);
     }
 
     @Override
     public void addItemToCart(int productId) {
         Product product = productRepository.findById(productId).orElseThrow();
-        User user = userService.getUser();
+        User user = userService.getUser().orElseThrow();
         Optional<CartItem> optional = cartItemRepository.findByUserAndProduct(user, product);
         if (optional.isPresent()) {
             CartItem cartItem = optional.get();
@@ -76,13 +76,13 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public void deleteAll() {
-        User user = userService.getUser();
+        User user = userService.getUser().orElseThrow();
         cartItemRepository.deleteAll(user.getCartItems());
     }
 
     @Override
     public double sumOfPrice() {
-        User user = userService.getUser();
+        User user = userService.getUser().orElseThrow();
         double sum = 0;
         for (CartItem item : user.getCartItems()) {
             sum += item.getProduct().getPrice() * item.getQuantity();

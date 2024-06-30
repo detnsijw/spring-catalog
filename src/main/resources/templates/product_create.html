@@ -11,26 +11,47 @@
 <body>
 <div class="container">
     <form action="/products/create" method="post" th:object="${product}">
-        <input type="hidden" name="categoryId" th:value="${category.id}">
+        <input type="hidden"
+               name="categoryId"
+               th:value="${category.id}">
         <div class="input-group mb-3">
             <label for="name">
                 Название товара
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="name" th:field="*{name}" required>
+                <input type="text"
+                       class="form-control"
+                       aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default"
+                       id="name"
+                       th:field="*{name}" required>
             </label>
         </div>
         <br>
         <div class="input-group mb-3">
             <label for="price">
                 Стоимость товара
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="price" th:field="*{price}" required>
+                <input type="text"
+                       class="form-control"
+                       aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default"
+                       id="price"
+                       th:field="*{price}" required>
             </label>
         </div>
         <div class="input-group mb-3" th:each="option : ${category.getOptions()}">
-            <input type="hidden" name="optionIds" th:value="${option.id}">
+            <input type="hidden"
+                   name="optionIds"
+                   th:value="${option.id}">
             <p th:text="${option.name}"></p>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="values">
+            <input type="text"
+                   class="form-control"
+                   aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-default"
+                   name="valueNames">
         </div>
-        <button type="submit" class="btn btn-dark">Создать</button>
+        <button type="submit"
+                class="btn btn-dark">
+            Создать
+        </button>
     </form>
 </div>
 </body>

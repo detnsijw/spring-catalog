@@ -35,11 +35,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser() {
+    public Optional<User> getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        return userRepository
-                .findByLogin(authentication.getName())
-                .orElseThrow();
+        return userRepository.findByLogin(authentication.getName());
     }
 }

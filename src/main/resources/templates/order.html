@@ -22,10 +22,11 @@
                 <span th:each="orderProduct : ${order.getOrderProducts()}">
                     <span th:text="${orderProduct.getProduct().getName()}"></span>
                     <span th:text="'(' + ${orderProduct.getQuantity()} + ')'"></span>
+                    <br>
                 </span>
             </td>
             <td th:text="${order.getStatus().getDisplayName()}"></td>
-            <td th:text="${order.getCreated()}"></td>
+            <td th:text="${@orderServiceImpl.getOrderDate(order)}"></td>
         </tr>
         </tbody>
     </table>

@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping("/user/orders")
     public String showUserOrders(Model model){
-        model.addAttribute("orders", userService.getUser().getOrders());
+        model.addAttribute("orders", userService.getUser().orElseThrow().getOrders());
         return "order";
     }
 }
